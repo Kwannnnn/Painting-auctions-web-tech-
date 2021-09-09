@@ -1,0 +1,7 @@
+###Get all paintings
+GET http://localhost:3000/paintings
+Accept: application/json
+
+###Get painting with id 3
+GET http://localhost:3000/paintings/3
+Accept: application/json
