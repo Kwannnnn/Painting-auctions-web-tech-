@@ -1,10 +1,11 @@
-const express = require("express");
+const express = require('express');
 const { StatusCodes } = require('http-status-codes');
 const router = express.Router();
+const paintings = require('../data/paintings');
 
-router.get('../paintings.json', (req , res) => {
-    res.send("this is supposed to be a list of all paintings");
-    res.status(StatusCodes.OK);
+router.get("", (req, res) => {
+    res.send(paintings);
 });
 
 module.exports = router;
+
