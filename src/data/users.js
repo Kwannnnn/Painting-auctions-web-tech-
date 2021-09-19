@@ -25,4 +25,5 @@ const users = [
         "password" : 5678
     }
 ];
+
 module.exports = users;
