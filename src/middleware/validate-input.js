@@ -10,12 +10,13 @@ exports.paintingValidators = [
         .notEmpty().withMessage("Artist name must not be empty"),
     body('year_of_origin')
         .escape()
-        .notEmpty().withMessage("Year of origin must not be empty"),
+        .isInt().withMessage("Year of origin must be an integer"),
     body('current_price')
         .escape()
         .isFloat({min: 0}).withMessage("Current price must be a number and not lower than 0"),
     body('end_date')
         .escape()
+        .isDate({format: "YYYY-MM-DD"}).withMessage("End date must be in the following format: YYYY-MM-DD")
         .notEmpty().withMessage("End date must not be empty")
 ];
 

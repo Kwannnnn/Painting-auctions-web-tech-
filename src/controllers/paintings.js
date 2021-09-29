@@ -55,14 +55,14 @@ exports.updatePainting = (req, res) => {
         const indexPaintingToEdit = paintings.findIndex(painting => painting.id == id);
 
         // check if painting exists
-        if (indexPaintingToEdit) {
-            paintings[indexPaintingToEdit] = painting;
-
-            res.json(paintings[indexPaintingToEdit]);
-        } else {
+        if (indexPaintingToEdit == -1) {
             res
                 .status(StatusCodes.NOT_FOUND)
                 .send(`Painting with id ${id} cannot be found`);
+        } else {
+            paintings[indexPaintingToEdit] = painting;
+
+            res.json(paintings[indexPaintingToEdit]);
         }
     } else {
         res
