@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/paintings', require('./routes/paintings'));
-app.use('/users', require('./routes/users'));
+app.use('/credentials', require('./routes/credentials'));
 app.use('/bids', require('./routes/bids'));
 
 app.listen(port, () => {

@@ -2,21 +2,39 @@ const {v4:uuidv4} = require('uuid');
 
 const users = [
     {
-        "id" : 1,
-        "email_address": "quan1@gmail.com",
-        "username": "quan1",
-        "password": "$2a$10$oqXtGFROFR5qx8MNhsfV9.z7ERn5T5RFSSZpkefKrVLryMBdLpZSq", //quan123
-        "secret": uuidv4(),
-        "isAdmin": true,
-        "list_of_bids": [1]
+        user_name : "test1",
+        email_address : "test@test.com",
+        password : 1234,
+        secret : uuidv4(),
+        roles : ['admin', 'user']
     },
     {
-        "id" : 2,
-        "email_address": "quan2@gmail.com",
-        "username": "quan2",
-        "password": "$2a$10$qgFIOHxoFvk9HhMmg2wDsOSVMF4DhJPHkKWdpUfqaHWRUPsAL3bGm", //quan456
-        "isAdmin": false,
-        "list_of_bids": [2]
+        user_name : "test2",
+        email_address : "test2@test.com",
+        password : 2345,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test3",
+        email_address : "test3@test.com",
+        password : 3456,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test4",
+        email_address : "test4@test.com",
+        password : 4567,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test5",
+        email_address : "test5@test.com",
+        password : 5678,
+        secret : uuidv4(),
+        roles : ['user']
     }
 ];
 
