@@ -1,21 +1,40 @@
-bids = require("../data/bids");
+const {v4:uuidv4} = require('uuid');
 
 const users = [
     {
-        "id" : 1,
-        "email_address": "user1@gmail.com",
-        "username": "user1",
-        "password": "",
-        "role": "admin",
-        "list_of_bids": [1]
+        user_name : "test1",
+        email_address : "test@test.com",
+        password : 1234,
+        secret : uuidv4(),
+        roles : ['admin', 'user']
     },
     {
-        "id" : 2,
-        "email_address": "user2@gmail.com",
-        "username": "user2",
-        "password": "",
-        "role": "user",
-        "list_of_bids": [2]
+        user_name : "test2",
+        email_address : "test2@test.com",
+        password : 2345,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test3",
+        email_address : "test3@test.com",
+        password : 3456,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test4",
+        email_address : "test4@test.com",
+        password : 4567,
+        secret : uuidv4(),
+        roles : ['user']
+    },
+    {
+        user_name : "test5",
+        email_address : "test5@test.com",
+        password : 5678,
+        secret : uuidv4(),
+        roles : ['user']
     }
 ];
 
