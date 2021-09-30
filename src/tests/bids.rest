@@ -4,7 +4,7 @@ GET http://{{host}}:{{port}}/bids
 Accept: application/json
 
 > {%
-client.test("Get all bids request", function() {
+client.test("Get all bids request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
 %}
@@ -14,7 +14,7 @@ GET http://{{host}}:{{port}}/bids/1
 Accept: application/json
 
 > {%
-client.test("Get one bid request", function() {
+client.test("Get one bid request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
 %}
@@ -26,11 +26,11 @@ Content-Type: application/json
 {
   "user_id": 1,
   "painting_id": 1,
-  "amount": 11
+  "amount": 1000
 }
 
 > {%
-client.test("Post one bid request", function() {
+client.test("Post one bid request good weather", function() {
   client.assert(response.status === 201, "Response status is not 201");
 });
  %}
@@ -40,7 +40,7 @@ DELETE http://{{host}}:{{port}}/bids/1
 Accept: application/json
 
 > {%
-client.test("Delete one bid request", function() {
+client.test("Delete one bid request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
  %}
@@ -52,7 +52,7 @@ GET http://{{host}}:{{port}}/bids/9
 Accept: application/json
 
 > {%
-client.test("Get one bid request", function() {
+client.test("Get one bid request bad weather", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
 %}
@@ -68,7 +68,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one bid request", function() {
+client.test("Post one bid request bad weather - empty fields", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -84,8 +84,8 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one bid request", function() {
-  client.assert(response.status === 400, "Response status is not 400");
+client.test("Post one bid request bad weather - invalid user id", function() {
+  client.assert(response.status === 404, "Response status is not 404");
 });
  %}
 
@@ -100,8 +100,8 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one bid request", function() {
-  client.assert(response.status === 400, "Response status is not 400");
+client.test("Post one bid request bad weather - invalid painting id", function() {
+  client.assert(response.status === 404, "Response status is not 404");
 });
  %}
 
@@ -116,7 +116,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one bid request", function() {
+client.test("Post one bid request bad weather - invalid amount", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -126,7 +126,7 @@ DELETE http://{{host}}:{{port}}/bids/9
 Accept: application/json
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one painting request bad weather", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
  %}

@@ -7,7 +7,7 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: []
+        list_of_bidders: [1]
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: []
+        list_of_bidders: [2]
     },
     {
         id: 3,

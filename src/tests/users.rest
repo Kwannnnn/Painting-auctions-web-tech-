@@ -1,182 +1,183 @@
 ###Good weather tests
-###Get all paintings
-GET http://{{host}}:{{port}}/paintings
+###Get all users
+GET http://{{host}}:{{port}}/users
 Accept: application/json
 
 > {%
-client.test("Get all paintings request", function() {
+client.test("Get all users request", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
 %}
 
-###Get painting with id 1
-GET http://{{host}}:{{port}}/paintings/1
+###Get user with id 1
+GET http://{{host}}:{{port}}/users/1
 Accept: application/json
 
 > {%
-client.test("Get one painting request", function() {
+client.test("Get one user request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
 %}
 
-###Post a painting
-POST http://{{host}}:{{port}}/paintings
+###Post a user
+POST http://{{host}}:{{port}}/users
 Content-Type: application/json
 
 {
-  "name": "last supper",
-  "artist_name": "leonardo davinci",
-  "year_of_origin": 679,
-  "current_price": 9999,
-  "end_date": "2021-12-02"
+  "username": "test69",
+  "email_address": "test69@test.com",
+  "password": "testing123",
+  "roles": [
+    "user"
+  ]
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one user request good weather", function() {
   client.assert(response.status === 201, "Response status is not 201");
 });
  %}
 
-###Update painting with id 2
-PUT http://{{host}}:{{port}}/paintings/2
+###Update user with id 2
+PUT http://{{host}}:{{port}}/users/2
 Content-Type: application/json
 
 {
   "id": 2,
-  "name": "painting 2 edited",
-  "artist_name": "artist name edited",
-  "year_of_origin": 474,
-  "current_price": 4747474,
-  "end_date": "2069-12-02"
+  "username": "test69",
+  "email_address": "test69@test.com",
+  "password": "testytest",
+  "roles": [
+    "admin"
+  ]
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one user request good weather", function() {
     client.assert(response.status === 200, "Response status is not 200");
 });
  %}
 
-###Delete painting with id 1
-DELETE http://{{host}}:{{port}}/paintings/1
+###Delete user with id 1
+DELETE http://{{host}}:{{port}}/users/1
 Accept: application/json
 
 > {%
-client.test("Delete one painting request", function() {
+client.test("Delete one user request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
  %}
 
 ###Bad weather tests
 
-###Get painting with id that does not exist: 9
-GET http://{{host}}:{{port}}/paintings/9
+###Get user with id that does not exist
+GET http://{{host}}:{{port}}/users/10
 Accept: application/json
 
 > {%
-client.test("Get one painting request", function() {
+client.test("Get one user request bad weather - nonexistent user", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
 %}
 
-###Post a painting with empty fields
-POST http://{{host}}:{{port}}/paintings
+###Post a user with empty fields
+POST http://{{host}}:{{port}}/users
 Content-Type: application/json
 
 {
-  "name": "",
-  "artist_name": "",
-  "year_of_origin": 679,
-  "current_price": 9999,
-  "end_date": ""
+  "username": "",
+  "email_address": "",
+  "password": "",
+  "roles": []
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one user request bad weather - empty fields", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
 
-###Post a painting with incorrect data
-POST http://{{host}}:{{port}}/paintings
+###Post a user with incorrect data
+POST http://{{host}}:{{port}}/users
 Content-Type: application/json
 
 {
-  "name": "the house",
-  "artist_name": "bach",
-  "year_of_origin": "last year",
-  "current_price": -1,
-  "end_date": "2021-24-02"
+  "username": "bobby",
+  "email_address": "bob-email",
+  "password": "bob",
+  "roles": ["d"]
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one user request - incorrect data", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
 
-###Update painting but ids mismatch
-PUT http://{{host}}:{{port}}/paintings/2
+###Update user but ids mismatch
+PUT http://{{host}}:{{port}}/users/2
 Content-Type: application/json
 
 {
   "id": 1,
-  "name": "painting 2 edited",
-  "artist_name": "artist name edited",
-  "year_of_origin": 474,
-  "current_price": 4747474,
-  "end_date": "2069-12-02"
+  "username": "bobby",
+  "email_address": "bob@email.com",
+  "password": "bobpassword",
+  "roles": [
+    "admin"
+  ]
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one user request - ids mismatch", function() {
     client.assert(response.status === 400, "Response status is not 400");
 });
  %}
 
-###Update painting that does not exist
-PUT http://{{host}}:{{port}}/paintings/9
+###Update user that does not exist
+PUT http://{{host}}:{{port}}/users/10
 Content-Type: application/json
 
 {
-  "id": 9,
-  "name": "painting 2 edited",
-  "artist_name": "artist name edited",
-  "year_of_origin": 474,
-  "current_price": 4747474,
-  "end_date": "2069-12-02"
+  "id": 10,
+  "username": "bobby",
+  "email_address": "bob@email.com",
+  "password": "bobpassword",
+  "roles": [
+    "admin"
+  ]
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one user request - nonexistent user", function() {
     client.assert(response.status === 404, "Response status is not 404");
 });
  %}
 
-###Update painting with empty and incorrect data
-PUT http://{{host}}:{{port}}/paintings/1
+###Update user with empty and incorrect data
+PUT http://{{host}}:{{port}}/users/1
 Content-Type: application/json
 
 {
-  "id": 1,
-  "name": "",
-  "artist_name": "",
-  "year_of_origin": 474,
-  "current_price": -1,
-  "end_date": "2069-12-34"
+  "id": 10,
+  "username": "",
+  "email_address": "bob-mail-me",
+  "password": "bob",
+  "roles":[]
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one user request - empty & incorrect data", function() {
     client.assert(response.status === 400, "Response status is not 400");
 });
  %}
 
-###Delete painting that does not exist
-DELETE http://{{host}}:{{port}}/paintings/9
+###Delete user that does not exist
+DELETE http://{{host}}:{{port}}/users/10
 Accept: application/json
 
 > {%
-client.test("Delete one painting request", function() {
+client.test("Delete one user request - nonexistent user", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
  %}

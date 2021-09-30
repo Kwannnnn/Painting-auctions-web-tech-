@@ -42,9 +42,9 @@ exports.userValidators = [
     body('password')
         .escape()
         .isLength({min: 5}).withMessage("Password must be at least 5 characters long"),
-    body('role')
+    body('roles')
         .escape()
-        .notEmpty().withMessage("Role must not be empty")
+        .notEmpty().withMessage("Roles must be an array and contains at least one element")
 ];
 
 exports.validateResult = (req, res, next) => {

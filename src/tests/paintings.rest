@@ -14,7 +14,7 @@ GET http://{{host}}:{{port}}/paintings/1
 Accept: application/json
 
 > {%
-client.test("Get one painting request", function() {
+client.test("Get one painting request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
 %}
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one painting request good weather", function() {
   client.assert(response.status === 201, "Response status is not 201");
 });
  %}
@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one painting request good weather", function() {
     client.assert(response.status === 200, "Response status is not 200");
 });
  %}
@@ -61,7 +61,7 @@ DELETE http://{{host}}:{{port}}/paintings/1
 Accept: application/json
 
 > {%
-client.test("Delete one painting request", function() {
+client.test("Delete one painting request good weather", function() {
   client.assert(response.status === 200, "Response status is not 200");
 });
  %}
@@ -73,7 +73,7 @@ GET http://{{host}}:{{port}}/paintings/9
 Accept: application/json
 
 > {%
-client.test("Get one painting request", function() {
+client.test("Get one painting request bad weather", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
 %}
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one painting request bad weather - empty fields", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -109,7 +109,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Post one painting request", function() {
+client.test("Post one painting request bad weather - incorrect data", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -128,7 +128,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one painting request bad weather - ids mismatch", function() {
     client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -147,7 +147,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one painting request bad weather - painting does not exist", function() {
     client.assert(response.status === 404, "Response status is not 404");
 });
  %}
@@ -166,7 +166,7 @@ Content-Type: application/json
 }
 
 > {%
-client.test("Update one painting request", function() {
+client.test("Update one painting request bad weather - empty & incorrect data", function() {
     client.assert(response.status === 400, "Response status is not 400");
 });
  %}
@@ -176,7 +176,7 @@ DELETE http://{{host}}:{{port}}/paintings/9
 Accept: application/json
 
 > {%
-client.test("Delete one painting request", function() {
+client.test("Delete one painting request bad weather - painting does not exist", function() {
   client.assert(response.status === 404, "Response status is not 404");
 });
  %}
