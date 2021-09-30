@@ -9,7 +9,11 @@ const isLoggedIn = (res, req, next) =>{
     const token = getTokenFromRequest(req);
 
     if (token){
-        const payload = verifyToken(token)
+        const payload = verifyToken(token);
+        if(payload){
+            req.user = payload;
+            return next();
+        }
     }
 
     res.status(StatusCodes.UNAUTHORIZED).send('Somethings wrong.. I can feel it');
