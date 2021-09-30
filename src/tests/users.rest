@@ -27,9 +27,7 @@ Content-Type: application/json
   "username": "test69",
   "email_address": "test69@test.com",
   "password": "testing123",
-  "roles": [
-    "user"
-  ]
+  "isAdmin": false
 }
 
 > {%

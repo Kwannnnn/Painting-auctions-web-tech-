@@ -54,7 +54,8 @@ exports.addUser = async (req, res) => {
         id: id,
         list_of_bids: [],
         password: passwordHash,
-        secret: uuidv4()
+        secret: uuidv4(),
+        isAdmin: false
     };
 
     users.push(completedUser);
@@ -81,7 +82,6 @@ exports.updateUser = (req, res) => {
         } else {
             users[indexUserToEdit].username = user.username;
             users[indexUserToEdit].email_address = user.email_address;
-            // issue with updating roles
             users[indexUserToEdit].roles = user.roles;
 
             res.json(users[indexUserToEdit]);

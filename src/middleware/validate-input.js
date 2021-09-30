@@ -1,4 +1,4 @@
-const {validationResult, body} = require("express-validator");
+const {validationResult, body, a} = require("express-validator");
 const {StatusCodes} = require("http-status-codes");
 
 exports.paintingValidators = [
@@ -42,9 +42,8 @@ exports.userValidators = [
     body('password')
         .escape()
         .isLength({min: 5}).withMessage("Password must be at least 5 characters long"),
-    body('roles')
-        .escape()
-        .notEmpty().withMessage("Roles must be an array and contains at least one element")
+    body('isAdmin')
+        .isBoolean().withMessage("isAdmin must be a boolean")
 ];
 
 exports.validateResult = (req, res, next) => {
