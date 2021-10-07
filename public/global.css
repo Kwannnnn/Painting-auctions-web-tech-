@@ -5,7 +5,6 @@ html, body {
 }
 
 body {
-	color: #333;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
@@ -13,8 +12,6 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
-	text-decoration: none;
 }
 
 a:hover {
@@ -22,7 +19,6 @@ a:hover {
 }
 
 a:visited {
-	color: rgb(0,80,160);
 }
 
 label {
@@ -45,13 +41,9 @@ input:disabled {
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
 }
 
 button:disabled {
-	color: #999;
 }
 
 button:not(:disabled):active {

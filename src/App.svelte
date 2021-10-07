@@ -1,5 +1,7 @@
 <script>
     import router from "page";
+    import isLoggedIn from "./middleware/is-logged-in";
+
     import LogIn from "./pages/LogIn.svelte";
     import Main from "./pages/Main.svelte";
     import Profile from "./pages/Profile.svelte";
@@ -10,8 +12,14 @@
 
     router('/login', (ctx) => page = LogIn);
     router('/main', (ctx) => page = Main);
-    router('/profile/:id', (ctx) => page = Profile);
-    router('/item/:id', (ctx) => page = Item);
+    router('/profile/:id', (ctx) => {
+        params = ctx.params;
+        page = Profile
+    });
+    router('/item/:id', (ctx) => {
+        params = ctx.params;
+        page = Item
+    });
 
     router.start();
 </script>
