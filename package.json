@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --single"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.3.7",
+    "page": "^1.11.6",
     "postcss": "^8.3.9",
     "sirv-cli": "^1.0.0",
     "svelte-preprocess": "^4.9.8",
