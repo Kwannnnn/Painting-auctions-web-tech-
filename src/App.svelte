@@ -3,33 +3,30 @@
     import isLoggedIn from "./middleware/is-logged-in";
 
     import LogIn from "./pages/LogIn.svelte";
-    import Main from "./pages/Main.svelte";
-    import Profile from "./pages/Profile.svelte";
-    import Item from "./pages/Item.svelte";
+    import Home from "./pages/Home.svelte";
+    import User from "./pages/User.svelte";
+    import Painting from "./pages/Painting.svelte";
+    import SignUp from "./pages/SignUp.svelte";
 
     let page;
     let params;
 
     router('/login', (ctx) => page = LogIn);
-    router('/main', (ctx) => page = Main);
-    router('/profile/:id', (ctx) => {
+    router('/signup', (ctx) => page = SignUp);
+    router('/', (ctx) => page = Home);
+    router('/users/:id', isLoggedIn, (ctx) => {
         params = ctx.params;
-        page = Profile
+        page = User
     });
-    router('/item/:id', (ctx) => {
+    router('/paintings/:id', isLoggedIn, (ctx) => {
         params = ctx.params;
-        page = Item
+        page = Painting;
     });
 
     router.start();
 </script>
 
 <svelte:component this="{page}" {params}/>
-
-
-<main>
-
-</main>
 
 <style lang="postcss" global>
 	@tailwind base;

@@ -1,14 +1,21 @@
 <script>
 import tokenStore from "../stores/token";
+import router from "page";
+
+function logout() {
+    $tokenStore.token = undefined;
+    router.redirect("/login");
+}
 </script>
 
-<header class="bg-gray-800 text-gray-100 text-2xl">
-    <a href="/main">Home</a>
-    <a href="/profile">Profile</a>
+<header class="flex justify-center bg-purple-700 opacity-80 text-gray-100 text-2xl p-1">
 
-    {#if tokenStore}
-        <a href="/login">LogIn</a>
+    <a href="/" class="no-underline text-current cursor-pointer m-1">Home</a>
+
+    {#if $tokenStore.token}
+        <a href="" class="no-underline text-current cursor-pointer m-1">Profile</a>
+        <a on:click={logout} class="no-underline text-current cursor-pointer m-1 justify-self-end">Logout</a>
     {:else }
-        <a href="/login">LogOut</a>
+        <a href="/login" class="no-underline text-current cursor-pointer m-1 justify-self-end">Login</a>
     {/if}
 </header>
