@@ -1,21 +1,38 @@
 <!--Taken and modified from https://svelte.dev/repl/ca967b45a5aa47b2bb2f9118eb79eefe?version=3.43.1-->
 <script>
-    import {useForm, validators, HintGroup, Hint, email, required, minLength} from "svelte-use-form";
+    import {email, Hint, HintGroup, minLength, required, useForm, validators} from "svelte-use-form";
     import tokenStore from "../stores/token";
     import router from "page";
-    import HeaderComponent from "../components/HeaderComponent.svelte";
 
     const form = useForm();
 
     let emailAddress;
     let password;
 
-    function login() {
-        //submit to backend endpoint username and password
+    const login = async () => {
+        //submit to backend endpoint email_address and password
+        const resp = await fetch('http://localhost:3000/credentials', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
 
-        const result = {token: "asdfalsdkvmsdlkm"};
-        $tokenStore = result;
-        router.redirect('/');
+            },
+            body: JSON.stringify({
+                email_address: emailAddress,
+                password: password
+            })
+        });
+
+
+        if (resp.ok) {
+            const token = JSON.stringify(await resp.json());
+            $tokenStore = {token: token};
+            router.redirect('/');
+        } else {
+            alert("login failed")
+        }
+
     }
 </script>
 

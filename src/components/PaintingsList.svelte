@@ -1,5 +1,6 @@
 <script>
     import router from 'page';
+    import Painting from "../components/Painting.svelte";
 
     export let paintingsList = [];
 
@@ -13,7 +14,7 @@
             {#each paintingsList as painting, i}
                 <div on:click={() => router.redirect(`/paintings/${i}`)}  class="flex pb-sm md:pb-md overruled rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar">
 <!--                    show data of painting-->
-
+                    <Painting data={painting}/>
                 </div>
             {/each}
         </div>
