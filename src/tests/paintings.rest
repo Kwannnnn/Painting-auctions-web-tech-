@@ -22,6 +22,7 @@ client.test("Get one painting request good weather", function() {
 ###Post a painting
 POST http://{{host}}:{{port}}/paintings
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "last supper",

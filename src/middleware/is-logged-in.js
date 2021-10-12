@@ -1,39 +1,44 @@
-const { StatusCodes } = require('http-status-codes');
+const {StatusCodes} = require('http-status-codes');
 const users = require('../data/users');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
-const isLoggedIn = (res, req, next) =>{
+const isLoggedIn = (req, res, next) => {
     console.log('Authentication time...loading');
     const token = getTokenFromRequest(req);
 
-    if (token){
+    if (token) {
         const payload = verifyToken(token);
-        if(payload){
+
+        if (payload) {
             req.user = payload;
             return next();
         }
     }
 
-    res.status(StatusCodes.UNAUTHORIZED).send('Somethings wrong.. I can feel it');
+    res.status(StatusCodes.UNAUTHORIZED).send('Something is wrong with your credentials');
 };
 
 const getTokenFromRequest = (req) => {
     const authHeader = req.headers['authorization'];
 
-    if(authHeader){
+    if (authHeader) {
         return authHeader.split(' ')[1];
     }
 };
 
 const verifyToken = (token) => {
-    const tokenPayload = jwt.decode(token);
-    console.log('user payload', tokenPayload);
-    if(tokenPayload){
-        const user = users.find((user) =>
-            user.username=== tokenPayload.username);
+    try {
+        const tokenPayload = jwt.decode(token);
+        console.log('user payload', tokenPayload);
+        if (tokenPayload) {
+            const user = users.find((user) => user.email_address === tokenPayload.email_address);
+            return jwt.verify(token, user.secret);
+        }
+    } catch (e) {
+        return false;
     }
 };
 
-module.exports=isLoggedIn;
+module.exports = isLoggedIn;

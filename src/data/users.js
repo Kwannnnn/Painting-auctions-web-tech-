@@ -4,17 +4,17 @@ const users = [
     {
         id: 1,
         username : "test1",
-        email_address : "test@test.com",
-        password : "$2a$10$g9BMcG1QnNDL5TmcU5a.RedeuoGGi7AfFYAgherrMcaj38jN8E7s2", //pass1
+        email_address : "test1@test.com",
+        password : "$2a$10$UJoC9VTbgAxeN6E8b/DzQ.O/bKPBjfikhHwZOONhV0/NWBClazDu6", //@Password1
         secret : uuidv4(),
-        isAdmin: false,
+        isAdmin: true,
         list_of_bids: [1]
     },
     {
         id: 2,
         username : "test2",
         email_address : "test2@test.com",
-        password : "$2a$10$79Q/Lc1A8ZYz/xFEkrEJ9eCMLWcOPG2N4DXhkTttGfDFjMuwr7PKS", //pass2
+        password : "$2a$10$ualu4YVjfKPaGTvQxNPrt.FBuJa07yBC8LAgGC3LHIMD9XX3nOQyS", //@Password2
         secret : uuidv4(),
         isAdmin: false,
         list_of_bids: [2]
@@ -23,7 +23,7 @@ const users = [
         id: 3,
         username : "test3",
         email_address : "test3@test.com",
-        password : "$2a$10$hCrIYI0QVzXlfClbs47rw.PTFhC6.EhBoawXaGiPOwt6nCvRgsN7C", //pass3
+        password : "$2a$10$/8r2CRsIuEeiAtNTm2WgNu74aolocegLvoyu5ZB40yOTot.yWNRp2", //@Password3
         secret : uuidv4(),
         isAdmin: true,
         list_of_bids: []
@@ -32,7 +32,7 @@ const users = [
         id: 4,
         username : "test4",
         email_address : "test4@test.com",
-        password : "$2a$10$qD5a2kdkMhTFT/93IbteQuRJTnBrOmweWRPHhlQnyzJser2wcg9wW", //pass4
+        password : "$2a$10$iqYj3vN83M.SeTWJGe0RQuolS/curr9MZpNmxF/1UTboAv..T08q.", //@Password4
         secret : uuidv4(),
         isAdmin: true,
         list_of_bids: []
@@ -41,7 +41,7 @@ const users = [
         id: 5,
         username : "test5",
         email_address : "test5@test.com",
-        password : "$2a$10$3i3eVgCzroGaa05PfYel6e.TSMyW3EMmPCPoqO2hkcrEylneO8fFC", //pass5
+        password : "$2a$10$PYTda7dprhqwk08fwxRvSeV8r/6wF2Abc9/M4VczlsTFbiwvResMS", //@Password5
         secret : uuidv4(),
         isAdmin: false,
         list_of_bids: [0]

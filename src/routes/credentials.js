@@ -7,16 +7,16 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-const login = (username, password) => {
+const login = (email_address, password) => {
     const user = users.find((user) => {
-        return user.username === username;
+        return user.email_address === email_address
     });
     if(user){
         const result = bcrypt.compareSync(password, user.password);
         if(result){
             return jwt.sign({
-                username: user.username,
-                roles: user.roles
+                email_address: user.email_address,
+                isAdmin: user.isAdmin
             }, user.secret);
         }
     }
@@ -24,17 +24,17 @@ const login = (username, password) => {
 }
 
 router.post('', (req, res) => {
-    const { username, password } = req.body;
+    const { email_address, password } = req.body;
 
-    if(username && password){
-        const token = login(username, password);
+    if(email_address && password){
+        const token = login(email_address, password);
         if(token){
             res.send({ token: token })
         }else{
-            res.status(StatusCodes.UNAUTHORIZED).send('Username and/or password are incorrect');
+            res.status(StatusCodes.UNAUTHORIZED).send('Email address and/or password are incorrect');
         }
     }else{
-        res.status(StatusCodes.BAD_REQUEST).send('username or password missing');
+        res.status(StatusCodes.BAD_REQUEST).send('Email address or password missing');
     }
 });
 

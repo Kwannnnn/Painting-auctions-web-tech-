@@ -1,0 +1,32 @@
+###Good weather tests
+###Logging in with correct credentials
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test1@test.com",
+  "password": "@Password1"
+}
+
+> {%
+client.test("Log in request", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+      client.global.set("auth_token", response.body.json.token);
+});
+%}
+
+###Bad weather tests
+###Logging in with incorrect credentials
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "wrongEmail@tes.com",
+  "password": "wrong password"
+}
+
+> {%
+client.test("Log in request bad weather", function() {
+  client.assert(response.status === 401, "Response status is not 401");
+});
+%}
