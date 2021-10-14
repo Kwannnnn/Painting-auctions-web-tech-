@@ -3,11 +3,24 @@
     import {email, Hint, HintGroup, minLength, required, useForm, validators} from "svelte-use-form";
     import tokenStore from "../stores/token";
     import router from "page";
+    import jwt_decode from "jwt-decode";
+    import {currentUser} from "../stores/currentUser";
 
     const form = useForm();
 
-    let emailAddress;
+    let email_address;
     let password;
+
+    const getUserFromToken = (token) => {
+        const {email_address, isAdmin} = jwt_decode(token);
+
+        const user = {
+            email_address: email_address,
+            isAdmin: isAdmin,
+        }
+
+        return user;
+    }
 
     const login = async () => {
         //submit to backend endpoint email_address and password
@@ -19,15 +32,16 @@
 
             },
             body: JSON.stringify({
-                email_address: emailAddress,
+                email_address: email_address,
                 password: password
             })
         });
 
-
         if (resp.ok) {
-            const token = JSON.stringify(await resp.json());
-            $tokenStore = {token: token};
+            const token = await resp.json();
+            tokenStore.set(token);
+
+            currentUser.set(getUserFromToken(token.token));
             router.redirect('/');
         } else {
             alert("login failed")
@@ -45,7 +59,7 @@
 
         <div class="relative mb-4">
             <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-            <input type="email" id="email" name="email" use:validators={[required, email]} bind:value={emailAddress}
+            <input type="email" id="email" name="email" use:validators={[required, email]} bind:value={email_address}
                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
             <HintGroup for="email">
                 <Hint on="required" class="text-red-500">This is a mandatory field</Hint>

@@ -18,7 +18,7 @@
         params = ctx.params;
         page = User
     });
-    router('/paintings/:id', isLoggedIn, (ctx) => {
+    router('/paintings/:id', (ctx) => {
         params = ctx.params;
         page = Painting;
     });

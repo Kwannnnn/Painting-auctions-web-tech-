@@ -19,11 +19,13 @@
   },
   "dependencies": {
     "autoprefixer": "^10.3.7",
+    "jwt-decode": "^3.1.2",
     "page": "^1.11.6",
     "postcss": "^8.3.9",
     "sirv-cli": "^1.0.0",
     "svelte-preprocess": "^4.9.8",
     "svelte-use-form": "^2.4.2",
-    "tailwindcss": "^2.2.16"
+    "tailwindcss": "^2.2.16",
+    "typescript": "^4.4.4"
   }
 }
