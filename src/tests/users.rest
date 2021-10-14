@@ -1,3 +1,17 @@
+###Logging in with correct credentials
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test1@test.com",
+  "password": "@Password1"
+}
+
+> {%
+client.log(client.global.get("auth_token"));
+client.global.set("auth_token", response.body.token);
+%}
+
 ###Good weather tests
 ###Get all users
 GET http://{{host}}:{{port}}/users
@@ -22,6 +36,7 @@ client.test("Get one user request good weather", function() {
 ###Post a user
 POST http://{{host}}:{{port}}/users
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "username": "test69",
@@ -39,15 +54,14 @@ client.test("Post one user request good weather", function() {
 ###Update user with id 2
 PUT http://{{host}}:{{port}}/users/2
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 2,
   "username": "test69",
   "email_address": "test69@test.com",
   "password": "testytest",
-  "roles": [
-    "admin"
-  ]
+  "isAdmin": false
 }
 
 > {%
@@ -56,9 +70,10 @@ client.test("Update one user request good weather", function() {
 });
  %}
 
-###Delete user with id 1
-DELETE http://{{host}}:{{port}}/users/1
+###Delete user with id 3
+DELETE http://{{host}}:{{port}}/users/3
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Delete one user request good weather", function() {
@@ -66,11 +81,12 @@ client.test("Delete one user request good weather", function() {
 });
  %}
 
-###Bad weather tests
 
+###Bad weather tests
 ###Get user with id that does not exist
 GET http://{{host}}:{{port}}/users/10
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Get one user request bad weather - nonexistent user", function() {
@@ -81,15 +97,17 @@ client.test("Get one user request bad weather - nonexistent user", function() {
 ###Post a user with empty fields
 POST http://{{host}}:{{port}}/users
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "username": "",
   "email_address": "",
-  "password": "",
-  "roles": []
+  "password": ""
 }
 
 > {%
+    client.log(client.global.get("auth_token"));
+
 client.test("Post one user request bad weather - empty fields", function() {
   client.assert(response.status === 400, "Response status is not 400");
 });
@@ -98,12 +116,13 @@ client.test("Post one user request bad weather - empty fields", function() {
 ###Post a user with incorrect data
 POST http://{{host}}:{{port}}/users
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "username": "bobby",
   "email_address": "bob-email",
   "password": "bob",
-  "roles": ["d"]
+  "isAdmin": false
 }
 
 > {%
@@ -115,15 +134,15 @@ client.test("Post one user request - incorrect data", function() {
 ###Update user but ids mismatch
 PUT http://{{host}}:{{port}}/users/2
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 1,
   "username": "bobby",
   "email_address": "bob@email.com",
   "password": "bobpassword",
-  "roles": [
-    "admin"
-  ]
+  "isAdmin": false
+
 }
 
 > {%
@@ -135,15 +154,14 @@ client.test("Update one user request - ids mismatch", function() {
 ###Update user that does not exist
 PUT http://{{host}}:{{port}}/users/10
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 10,
   "username": "bobby",
   "email_address": "bob@email.com",
   "password": "bobpassword",
-  "roles": [
-    "admin"
-  ]
+  "isAdmin": false
 }
 
 > {%
@@ -155,13 +173,14 @@ client.test("Update one user request - nonexistent user", function() {
 ###Update user with empty and incorrect data
 PUT http://{{host}}:{{port}}/users/1
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 10,
   "username": "",
   "email_address": "bob-mail-me",
   "password": "bob",
-  "roles":[]
+  "isAdmin": false
 }
 
 > {%
@@ -173,9 +192,41 @@ client.test("Update one user request - empty & incorrect data", function() {
 ###Delete user that does not exist
 DELETE http://{{host}}:{{port}}/users/10
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Delete one user request - nonexistent user", function() {
   client.assert(response.status === 404, "Response status is not 404");
+});
+ %}
+
+###Logging in with correct credentials but not as an admin
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test2@test.com",
+  "password": "@Password2"
+}
+
+> {%
+client.global.set("auth_token", response.body.token);
+%}
+
+###Post an user without admin priviledge
+POST http://{{host}}:{{port}}/users
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "username": "test69",
+  "email_address": "test69@test.com",
+  "password": "testing123",
+  "isAdmin": false
+}
+
+> {%
+client.test("Post one user request bad weather - not admin", function() {
+  client.assert(response.status === 401, "Response status is not 400");
 });
  %}

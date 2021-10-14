@@ -1,3 +1,16 @@
+###Logging in with correct credentials and as an admin
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test1@test.com",
+  "password": "@Password1"
+}
+
+> {%
+client.global.set("auth_token", response.body.token);
+%}
+
 ###Good weather tests
 ###Get all paintings
 GET http://{{host}}:{{port}}/paintings
@@ -41,6 +54,7 @@ client.test("Post one painting request good weather", function() {
 ###Update painting with id 2
 PUT http://{{host}}:{{port}}/paintings/2
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 2,
@@ -60,6 +74,7 @@ client.test("Update one painting request good weather", function() {
 ###Delete painting with id 1
 DELETE http://{{host}}:{{port}}/paintings/1
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Delete one painting request good weather", function() {
@@ -82,6 +97,7 @@ client.test("Get one painting request bad weather", function() {
 ###Post a painting with empty fields
 POST http://{{host}}:{{port}}/paintings
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "",
@@ -100,6 +116,7 @@ client.test("Post one painting request bad weather - empty fields", function() {
 ###Post a painting with incorrect data
 POST http://{{host}}:{{port}}/paintings
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "the house",
@@ -118,6 +135,7 @@ client.test("Post one painting request bad weather - incorrect data", function()
 ###Update painting but ids mismatch
 PUT http://{{host}}:{{port}}/paintings/2
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 1,
@@ -137,6 +155,7 @@ client.test("Update one painting request bad weather - ids mismatch", function()
 ###Update painting that does not exist
 PUT http://{{host}}:{{port}}/paintings/9
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 9,
@@ -156,6 +175,7 @@ client.test("Update one painting request bad weather - painting does not exist",
 ###Update painting with empty and incorrect data
 PUT http://{{host}}:{{port}}/paintings/1
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 1,
@@ -175,9 +195,42 @@ client.test("Update one painting request bad weather - empty & incorrect data", 
 ###Delete painting that does not exist
 DELETE http://{{host}}:{{port}}/paintings/9
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Delete one painting request bad weather - painting does not exist", function() {
   client.assert(response.status === 404, "Response status is not 404");
+});
+ %}
+
+###Logging in with correct credentials but not as an admin
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test2@test.com",
+  "password": "@Password2"
+}
+
+> {%
+client.global.set("auth_token", response.body.token);
+%}
+
+###Post a painting without admin priviledge
+POST http://{{host}}:{{port}}/paintings
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name": "painting",
+  "artist_name": "artist",
+  "year_of_origin": 679,
+  "current_price": 9999,
+  "end_date": "2021-12-01"
+}
+
+> {%
+client.test("Post one painting request bad weather - not admin", function() {
+  client.assert(response.status === 401, "Response status is not 400");
 });
  %}

@@ -1,3 +1,16 @@
+###Logging in with correct credentials
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test1@test.com",
+  "password": "@Password1"
+}
+
+> {%
+client.global.set("auth_token", response.body.token);
+%}
+
 ###Good weather tests
 ###Get all bids
 GET http://{{host}}:{{port}}/bids
@@ -22,6 +35,7 @@ client.test("Get one bid request good weather", function() {
 ###Post a bid
 POST http://{{host}}:{{port}}/bids
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "user_id": 1,
@@ -38,6 +52,7 @@ client.test("Post one bid request good weather", function() {
 ###Delete bid with id 1
 DELETE http://{{host}}:{{port}}/bids/1
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Delete one bid request good weather", function() {
@@ -60,6 +75,7 @@ client.test("Get one bid request bad weather", function() {
 ###Post a bid with empty fields
 POST http://{{host}}:{{port}}/bids
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "user_id": "",
@@ -76,6 +92,7 @@ client.test("Post one bid request bad weather - empty fields", function() {
 ###Post a bid with invalid user id
 POST http://{{host}}:{{port}}/bids
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "user_id": 9,
@@ -92,6 +109,7 @@ client.test("Post one bid request bad weather - invalid user id", function() {
 ###Post a bid with invalid painting id
 POST http://{{host}}:{{port}}/bids
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "user_id": 1,
@@ -108,6 +126,7 @@ client.test("Post one bid request bad weather - invalid painting id", function()
 ###Post a bid with invalid amount (bid amount less than current auction price)
 POST http://{{host}}:{{port}}/bids
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "user_id": 1,
@@ -124,9 +143,34 @@ client.test("Post one bid request bad weather - invalid amount", function() {
 ###Delete bid that does not exist
 DELETE http://{{host}}:{{port}}/bids/9
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 > {%
 client.test("Post one painting request bad weather", function() {
   client.assert(response.status === 404, "Response status is not 404");
+});
+ %}
+
+###Logging in with correct credentials but not as an admin
+POST http://{{host}}:{{port}}/credentials
+Content-Type: application/json
+
+{
+  "email_address": "test2@test.com",
+  "password": "@Password2"
+}
+
+> {%
+client.global.set("auth_token", response.body.token);
+%}
+
+###Delete a bid without admin priviledge
+DELETE http://{{host}}:{{port}}/bids/7
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+> {%
+client.test("Delete one bid request bad weather - not admin", function() {
+  client.assert(response.status === 401, "Response status is not 400");
 });
  %}
