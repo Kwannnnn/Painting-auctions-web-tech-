@@ -13,6 +13,7 @@ app.use('/paintings', require('./routes/paintings'));
 app.use('/credentials', require('./routes/credentials'));
 app.use('/bids', require('./routes/bids'));
 app.use('/users', require('./routes/users'));
+app.use(express.static('resources'));
 
 app.listen(port, () => {
     console.log(`API is running on port ${port}!`);

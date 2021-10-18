@@ -7,7 +7,8 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: [1]
+        list_of_bidders: [1],
+        img_name: "TheScream"
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: [2]
+        list_of_bidders: [2],
+        img_name: "StarryNight"
     },
     {
         id: 3,
@@ -27,7 +29,8 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: []
+        list_of_bidders: [],
+        img_name: "TheKiss"
     },
     {
         id: 4,
@@ -37,17 +40,19 @@ const paintings = [
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: []
+        list_of_bidders: [],
+        img_name: "GirlwithaPearlEarring"
     },
     {
-        "id": 5,
+        id: 5,
         name: "Mona Lisa",
         artist: "Leonardo da Vinci",
         year_of_origin: 1506,
         current_price: 200,
         end_date: "15-11-2021",
         is_sold: false,
-        list_of_bidders: []
+        list_of_bidders: [],
+        img_name: "MonaLisa"
     }
 ];
 
