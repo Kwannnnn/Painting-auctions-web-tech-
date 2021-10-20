@@ -1,13 +1,12 @@
 <script>
     import HeaderComponent from "../components/HeaderComponent.svelte";
     import PageLayout from "../components/layout/PageLayout.svelte";
-    import PaintingModal from "../components/PaintingModal.svelte";
     import {writable} from "svelte/store";
     import {onMount} from "svelte";
     import Painting from "./Painting.svelte";
     import Button from "../components/button/Button.svelte";
     import {currentUser} from "../stores/currentUser";
-    import PaintingsList from "../components/PaintingsList.svelte";
+    import PaintingsList from "../components/paintings/PaintingsList.svelte";
 
     let showModal;
 
@@ -28,7 +27,6 @@
             return await resp.json();
         } else {
             throw new Error(await resp.text());
-
         }
     }
 

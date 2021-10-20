@@ -4,6 +4,7 @@
 
     import LogIn from "./pages/LogIn.svelte";
     import Home from "./pages/Home.svelte";
+    import Admin from "./pages/Admin.svelte";
     import User from "./pages/User.svelte";
     import Painting from "./pages/Painting.svelte";
     import SignUp from "./pages/SignUp.svelte";
@@ -14,6 +15,7 @@
     router('/login', (ctx) => page = LogIn);
     router('/signup', (ctx) => page = SignUp);
     router('/', (ctx) => page = Home);
+    router('/admin', (ctx) => page = Admin);
     router('/users/:id', isLoggedIn, (ctx) => {
         params = ctx.params;
         page = User

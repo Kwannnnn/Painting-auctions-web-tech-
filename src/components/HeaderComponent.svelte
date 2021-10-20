@@ -18,6 +18,7 @@
 
     {#if $tokenStore.token}
         <a href="" class="no-underline text-current cursor-pointer m-1">Profile</a>
+        <a href="/admin" class="no-underline text-current cursor-pointer m-1">Admin</a>
         <a on:click={logout} class="no-underline text-current cursor-pointer m-1 justify-self-end">Logout</a>
     {:else }
         <a href="/login" class="no-underline text-current cursor-pointer m-1 justify-self-end">Login</a>

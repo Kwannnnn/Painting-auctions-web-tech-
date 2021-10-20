@@ -1,6 +1,6 @@
 <script>
     import router from 'page';
-    import Painting from "../components/Painting.svelte";
+    import Painting from "./Painting.svelte";
 
     export let paintingsList = [];
 

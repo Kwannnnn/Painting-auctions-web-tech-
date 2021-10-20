@@ -2,7 +2,6 @@
     export let data = {};
 </script>
 
-<!--show info of the painting-->
 {#if data}
     <div>
         <p>{data.name}</p>
@@ -13,6 +12,4 @@
         <p>{data.is_sold}</p>
         <p>{data.list_of_bidders}</p>
     </div>
-    {:else }
-    <h1>The painting cannot be displayed because there is no data</h1>
 {/if}
