@@ -5,7 +5,7 @@ exports.paintingValidators = [
     body('name')
         .escape()
         .notEmpty().withMessage("Painting name must not be empty"),
-    body('artist_name')
+    body('artist')
         .escape()
         .notEmpty().withMessage("Artist name must not be empty"),
     body('year_of_origin')

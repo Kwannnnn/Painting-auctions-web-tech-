@@ -5,8 +5,8 @@ const paintings = [
         artist: "Edvard Munch",
         year_of_origin: 1893,
         current_price: 200,
-        end_date: "15-11-2021",
-        is_sold: false,
+        end_date: "2021-12-24",
+        is_sold: true,
         list_of_bidders: [1],
         img_name: "TheScream"
     },
@@ -16,7 +16,7 @@ const paintings = [
         artist: "Vincent van Gogh",
         year_of_origin: 1889,
         current_price: 200,
-        end_date: "15-11-2021",
+        end_date: "2021-11-15",
         is_sold: false,
         list_of_bidders: [2],
         img_name: "StarryNight"
@@ -27,7 +27,7 @@ const paintings = [
         artist: "Gustav Klimt",
         year_of_origin: 1909,
         current_price: 200,
-        end_date: "15-11-2021",
+        end_date: "2021-10-31",
         is_sold: false,
         list_of_bidders: [],
         img_name: "TheKiss"
@@ -38,7 +38,7 @@ const paintings = [
         artist: "Johannes Vermeer",
         year_of_origin: 1665,
         current_price: 200,
-        end_date: "15-11-2021",
+        end_date: "2021-12-1",
         is_sold: false,
         list_of_bidders: [],
         img_name: "GirlwithaPearlEarring"
@@ -49,7 +49,7 @@ const paintings = [
         artist: "Leonardo da Vinci",
         year_of_origin: 1506,
         current_price: 200,
-        end_date: "15-11-2021",
+        end_date: "2022-01-28",
         is_sold: false,
         list_of_bidders: [],
         img_name: "MonaLisa"

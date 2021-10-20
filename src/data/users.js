@@ -5,7 +5,8 @@ const users = [
         id: 1,
         username : "test1",
         email_address : "test1@test.com",
-        password : "$2a$10$UJoC9VTbgAxeN6E8b/DzQ.O/bKPBjfikhHwZOONhV0/NWBClazDu6", //@Password1
+        // password : "$2a$10$UJoC9VTbgAxeN6E8b/DzQ.O/bKPBjfikhHwZOONhV0/NWBClazDu6", //@Password1
+        password : "$2a$10$oDXNXWKG.C/46F7g.vEh.OrYStCdeP5VLoAAfQbGZFiJ0zp3UYHkm", // "1" for easy testing
         secret : uuidv4(),
         isAdmin: true,
         list_of_bids: [1]
