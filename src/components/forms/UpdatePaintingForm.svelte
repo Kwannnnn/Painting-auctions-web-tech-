@@ -1,7 +1,7 @@
 <script>
     import {createEventDispatcher, onMount} from 'svelte';
-    import FormHeading from "./FormHeading.svelte";
-    import Button from "./button/Button.svelte";
+    import FormHeading from "../FormHeading.svelte";
+    import Button from "../button/Button.svelte";
 
     let dispatch = createEventDispatcher();
 

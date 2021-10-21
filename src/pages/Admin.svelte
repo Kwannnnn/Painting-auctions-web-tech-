@@ -3,9 +3,9 @@
     import PaintingsTable from "../components/paintings/PaintingsTable.svelte";
     import tokenStore from "../stores/token";
     import NewPaintingModal from "../components/Modal.svelte";
-    import CreatePaintingForm from "../components/CreatePaintingForm.svelte";
+    import CreatePaintingForm from "../components/forms/CreatePaintingForm.svelte";
     import Button from "../components/button/Button.svelte";
-    import UpdatePaintingForm from "../components/UpdatePaintingForm.svelte";
+    import UpdatePaintingForm from "../components/forms/UpdatePaintingForm.svelte";
     import PageLayout from "../components/layout/PageLayout.svelte";
 
     let paintings;

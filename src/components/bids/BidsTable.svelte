@@ -1,7 +1,7 @@
 <script>
     import {currentUser} from "../../stores/currentUser";
-    import {createEventDispatcher, onMount} from 'svelte';
-    import TrashIcon from "../../icons/TrashIcon.svelte";
+    import {createEventDispatcher} from 'svelte';
+
 
     let dispatch = createEventDispatcher();
 
@@ -12,31 +12,47 @@
     export let bids;
 </script>
 
-<table class="border-collapse border border-gray-800">
-    <thead>
-    <tr class="bg-gray-300">
-        <th class="text-left border border-gray-800">Bid id</th>
-        <th class="text-left border border-gray-800">User id</th>
-        <th class="text-left border border-gray-800">Painting id</th>
-        <th class="text-left border border-gray-800">Amount</th>
-        {#if $currentUser.isAdmin}
-            <th class="text-left border border-gray-800">Delete Bid</th>
-        {/if}
-    </tr>
-    </thead>
-    <tbody>
-    {#each bids as bid}
-        <tr class="hover:bg-yellow-50">
-            <td>{bid.id}</td>
-            <td>{bid.user_id}</td>
-            <td>{bid.painting_id}</td>
-            <td>{bid.amount}</td>
-            {#if $currentUser.isAdmin}
-                <td class="text-left border border-gray-800">
-                    <TrashIcon on:click={handleDelete(bid.id)}/>
-                </td>
-            {/if}
-        </tr>
-    {/each}
-    </tbody>
-</table>
+<div class="mx-6 flex flex-col text-left">
+    <div class=" overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block lg:min-w-xl sm:min-w-xs sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200 rounded-l-lg">
+                <table class="divide-y divide-gray-200 my-6 mx-4">
+                    <thead class="bg-gray-100">
+                    <tr>
+                        <th scope="col"
+                            class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">Bid id
+                        </th>
+                        <th scope="col"
+                            class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">User
+                            id
+                        </th>
+                        <th scope="col"
+                            class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">
+                            Painting id
+                        </th>
+                        <th scope="col"
+                            class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">Amount
+                        </th>
+                        {#if $currentUser.isAdmin}
+                            <th scope="col"
+                                class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">
+                                Delete Bid
+                            </th>
+                        {/if}
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    {#each bids as bid}
+                        <tr class="hover:bg-gray-100">
+                            <td class="px-10 py-2 whitespace-nowrap">{bid.id}</td>
+                            <td class="px-10 py-2 whitespace-nowrap">{bid.user_id}</td>
+                            <td class="px-10 py-2 whitespace-nowrap">{bid.painting_id}</td>
+                            <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i></td>
+                        </tr>
+                    {/each}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

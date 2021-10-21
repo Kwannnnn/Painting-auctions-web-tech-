@@ -63,17 +63,17 @@
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
                         <div>
-                            <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                            <a href="/" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Home</a>
-                            <a href="/admin" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                            <a href="/admin" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Global settings</a>
-                            <a href="/users/{uid}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                            <a href="/users/{uid}" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Profile</a>
                             {#if $tokenStore.token}
-                                <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
                                    aria-current="page">Log out</a>
                             {:else}
-                                <a href="/login" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                <a href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                    aria-current="page">Log in</a>
                             {/if}
                         </div>

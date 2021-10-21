@@ -116,11 +116,12 @@
         {#if a}
             <Painting bind:data={painting}/>
 
+            <BidsTable bind:bids={bidsForPainting} on:deleteBid={(id) => deleteBid(id)}/>
+
             <Button on:click={() => deletePainting(paintingId)}>
                 Delete Auction
             </Button>
 
-            <BidsTable bind:bids={bidsForPainting} on:deleteBid={(id) => deleteBid(id)}/>
         {:else }
             <Painting404/>
         {/if}
