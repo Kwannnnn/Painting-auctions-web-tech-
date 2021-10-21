@@ -10,10 +10,13 @@
     {#if paintingsList.length === 0}
         <p>There are no items</p>
     {:else}
-        <div class="grid grid-flow-row lg:grid-flow-col lg:grid-cols-3 lg:gap-12">
+        <div class="flex flex-wrap -mx-3 overflow-hidden">
             {#each paintingsList as painting, i}
-                <div on:click={() => router.redirect(`/paintings/${i+1}`)}  class="flex pb-sm md:pb-md overruled rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar">
-                    <Painting data={painting}/>
+                <div on:click={() => router.redirect(`/paintings/${i+1}`)}  class="my-3 px-10 w-full h-full overflow-hidden sm:w-full lg:w-1/2 xl:w-1/2">
+                    <div class="flex pb-sm md:pb-md overruled rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar">
+                        <Painting data={painting}/>
+                    </div>
+
                 </div>
             {/each}
         </div>

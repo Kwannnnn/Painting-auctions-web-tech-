@@ -4,26 +4,16 @@
     import tokenStore from "../stores/token";
     import router from "page";
     import UserIcon from "../icons/UserIcon.svelte";
+    import {currentUser} from "../stores/currentUser";
 
+    let uid = $currentUser.id;
     function logout() {
         $tokenStore.token = undefined;
         router.redirect("/");
     }
+
+
 </script>
-
-<!--navbar 1-->
-<header class="flex justify-center bg-purple-700 opacity-80 text-gray-100 text-2xl p-1">
-
-    <a href="/" class="no-underline text-current cursor-pointer m-1">Home</a>
-
-    {#if $tokenStore.token}
-        <a href="" class="no-underline text-current cursor-pointer m-1">Profile</a>
-        <a href="/admin" class="no-underline text-current cursor-pointer m-1">Admin</a>
-        <a on:click={logout} class="no-underline text-current cursor-pointer m-1 justify-self-end">Logout</a>
-    {:else }
-        <a href="/login" class="no-underline text-current cursor-pointer m-1 justify-self-end">Login</a>
-    {/if}
-</header>
 
 
 <!--navbar 2-->
@@ -72,9 +62,22 @@
                 <!--items-->
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
+                        <div>
+                            <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                               aria-current="page">Home</a>
+                            <a href="/admin" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                               aria-current="page">Global settings</a>
+                            <a href="/users/{uid}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                               aria-current="page">Profile</a>
+                            {#if $tokenStore.token}
+                                <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                   aria-current="page">Log out</a>
+                            {:else}
+                                <a href="/login" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                   aria-current="page">Log in</a>
+                            {/if}
+                        </div>
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                           aria-current="page">Home</a>
 
                     </div>
                 </div>

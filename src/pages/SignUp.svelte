@@ -3,7 +3,6 @@
     import {useForm, validators, HintGroup, Hint, email, required, minLength} from "svelte-use-form";
     import tokenStore from "../stores/token";
     import router from "page";
-    import HeaderComponent from "../components/HeaderComponent.svelte";
 
     const form = useForm();
 

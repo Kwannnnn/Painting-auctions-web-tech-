@@ -6,6 +6,7 @@
     import CreatePaintingForm from "../components/CreatePaintingForm.svelte";
     import Button from "../components/button/Button.svelte";
     import UpdatePaintingForm from "../components/UpdatePaintingForm.svelte";
+    import PageLayout from "../components/layout/PageLayout.svelte";
 
     let paintings;
     let bearer = `Bearer ${$tokenStore.token}`;
@@ -136,7 +137,8 @@
     let modalData;
 </script>
 
-{#await getAllPaintings()}
+<PageLayout>
+    {#await getAllPaintings()}
 {:then a}
     <PaintingsTable bind:paintings={paintings}
                     on:deletePainting={(data) => deletePainting(data)}
@@ -160,3 +162,5 @@
     <h1>Something went wrong</h1>
     <p>{error.message}</p>
 {/await}
+
+</PageLayout>

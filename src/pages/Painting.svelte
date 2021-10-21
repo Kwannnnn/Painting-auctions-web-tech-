@@ -5,6 +5,7 @@
     import tokenStore from "../stores/token"
     import BidsTable from "../components/bids/BidsTable.svelte";
     import Painting404 from "../components/paintings/Painting404.svelte";
+    import PageLayout from "../components/layout/PageLayout.svelte";
 
     export let params;
 
@@ -32,7 +33,7 @@
             });
 
             if (resp.ok) {
-                const result =  await resp.json();
+                const result = await resp.json();
                 return result;
             }
         }
@@ -109,21 +110,21 @@
     }
 
 </script>
-
-{#await getPainting(paintingId)}
+<PageLayout>
+    {#await getPainting(paintingId)}
     {:then a}
-    {#if a}
-        <Painting bind:data={painting}/>
+        {#if a}
+            <Painting bind:data={painting}/>
 
-        <Button on:click={() => deletePainting(paintingId)}>
-            Delete Auction
-        </Button>
+            <Button on:click={() => deletePainting(paintingId)}>
+                Delete Auction
+            </Button>
 
-        <BidsTable bind:bids={bidsForPainting} on:deleteBid={(id) => deleteBid(id)}/>
+            <BidsTable bind:bids={bidsForPainting} on:deleteBid={(id) => deleteBid(id)}/>
         {:else }
-        <Painting404/>
-    {/if}
+            <Painting404/>
+        {/if}
 
-{/await}
+    {/await}
 
-
+</PageLayout>
