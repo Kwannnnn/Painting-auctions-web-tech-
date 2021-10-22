@@ -16,7 +16,8 @@ const login = (email_address, password) => {
         if(result){
             return jwt.sign({
                 email_address: user.email_address,
-                isAdmin: user.isAdmin
+                isAdmin: user.isAdmin,
+                id: user.id
             }, user.secret);
         }
     }
