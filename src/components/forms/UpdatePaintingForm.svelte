@@ -1,25 +1,11 @@
 <script>
-    import {createEventDispatcher, onMount} from 'svelte';
+    import {createEventDispatcher} from 'svelte';
     import FormHeading from "./FormHeading.svelte";
     import Button from "../button/Button.svelte";
 
     let dispatch = createEventDispatcher();
 
     export let painting;
-
-    onMount(() => {
-        name = painting.name;
-        artist = painting.artist;
-        year_of_origin = painting.year_of_origin;
-        end_date = painting.end_date;
-
-    })
-
-    let name;
-    let artist;
-    let year_of_origin;
-    let end_date;
-    let current_price;
 
     const handleSubmit = () => {
         dispatch('updatePainting', painting);

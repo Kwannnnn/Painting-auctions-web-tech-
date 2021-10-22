@@ -2,6 +2,7 @@
     import PageLayout from "../components/layout/PageLayout.svelte";
     import {currentUser} from "../stores/currentUser";
     import PaintingsList from "../components/paintings/PaintingsList.svelte";
+    import SearchBar from "../components/SearchBar.svelte";
 
 
     let paintings = [];
@@ -22,15 +23,12 @@
     {#await getPaintings()}
         <p>Loading paintings...</p>
     {:then paintings}
-        <div class="container max-w-7xl">
-            <div class="grid grid-flow-row auto-rows-max gap-8">
-                <div>
-                    <h2>Welcome back, {$currentUser.email_address}</h2>
+        <SearchBar>
 
-                    <PaintingsList paintingsList={paintings}/>
-                </div>
+        </SearchBar>
 
-            </div>
+        <div class="container w-full mx-auto">
+            <PaintingsList paintingsList={paintings}/>
         </div>
     {:catch error}
         <h1>Something went wrong</h1>

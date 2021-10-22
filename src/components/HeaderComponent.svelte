@@ -65,22 +65,27 @@
                         <div>
                             <a href="/" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Home</a>
-                            <a href="/admin" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                            <a href="/admin" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Admin</a>
                             <a href="/users/{uid}" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Profile</a>
-                            {#if $tokenStore.token}
-                                <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
-                                   aria-current="page">Log out</a>
-                            {:else}
-                                <a href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                                   aria-current="page">Log in</a>
-                            {/if}
                         </div>
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
                     </div>
                 </div>
+
+                <div class="ml-auto">
+                    {#if $tokenStore.token}
+                        <p class="text-white inline px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
+                           aria-current="page">{$currentUser.email_address}</p>
+                        <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
+                           aria-current="page">Log out</a>
+                    {:else}
+                        <a href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
+                           aria-current="page">Log in</a>
+                    {/if}
+                </div>
+
             </div>
 <!--            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">-->
 <!--            Click on user icon to go to profile page-->
