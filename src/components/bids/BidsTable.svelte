@@ -1,6 +1,7 @@
 <script>
     import {currentUser} from "../../stores/currentUser";
     import {createEventDispatcher} from 'svelte';
+    import TrashIcon from "../../icons/TrashIcon.svelte";
 
 
     let dispatch = createEventDispatcher();
@@ -48,7 +49,13 @@
                             <td class="px-10 py-2 whitespace-nowrap">{bid.user_id}</td>
                             <td class="px-10 py-2 whitespace-nowrap">{bid.painting_id}</td>
                             <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i></td>
-                        </tr>
+                            {#if $currentUser.isAdmin}
+                                <td class="px-10 py-2 whitespace-nowrap">
+                                    <TrashIcon on:click={() => handleDelete(bid.id)}/>
+                                </td>
+
+                            {/if}
+                            </tr>
                     {/each}
                     </tbody>
                 </table>

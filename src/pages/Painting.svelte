@@ -6,6 +6,8 @@
     import BidsTable from "../components/bids/BidsTable.svelte";
     import Painting404 from "../components/paintings/Painting404.svelte";
     import PageLayout from "../components/layout/PageLayout.svelte";
+    import BidForm from "../components/BidForm.svelte";
+    import Modal from "../components/Modal.svelte";
 
     export let params;
 
@@ -21,6 +23,7 @@
 
     let painting;
     let bidsForPainting;
+    let showBidModal = false;
 
     const getPainting = async (id) => {
         if (id) {
@@ -43,24 +46,37 @@
         painting = await getPainting(paintingId);
     }
 
-    const deletePainting = async (id) => {
-        if (id) {
-            const resp = await fetch(`http://localhost:3000/paintings/${id}`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': bearer
-                }
-            });
+    const toggleBidModal = () => {
+        showBidModal = !showBidModal;
+    }
 
-            if (resp.ok) {
-                alert("deleted")
-                reloadPainting();
-            } else {
-                throw new Error(await resp.text());
-            }
+    const addBid = async (e) => {
+        const bid = e.detail;
+        console.log(bid);
+
+        const response = await fetch('http://localhost:3000/bids', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': bearer
+            },
+            body: JSON.stringify({
+                user_id: bid.user_id,
+                painting_id: bid.painting_id,
+                amount: bid.amount
+            })
+        });
+
+        if (response.status === 201) {
+            alert("Bid successfully added");
+            reloadPainting();
+            reloadTable();
+        } else {
+            alert("Failed to add new bid \n" + response.statusText);
         }
+
+        toggleBidModal();
     }
 
     const getBidsForPainting = async (id) => {
@@ -114,13 +130,20 @@
     {#await getPainting(paintingId)}
     {:then a}
         {#if a}
-            <Painting bind:data={painting}/>
+            <Modal isPromo={true} bind:showModal={showBidModal} on:click={toggleBidModal}>
+                <BidForm bind:painting={painting} on:addBid={(data) => {addBid(data)}}/>
+            </Modal>
+
+            <Painting bind:painting={painting}/>
 
             <BidsTable bind:bids={bidsForPainting} on:deleteBid={(id) => deleteBid(id)}/>
 
-            <Button on:click={() => deletePainting(paintingId)}>
-                Delete Auction
-            </Button>
+            {#if $tokenStore.token}
+                <Button on:click={toggleBidModal}>
+                    Place a bid
+                </Button>
+            {/if}
+
 
         {:else }
             <Painting404/>

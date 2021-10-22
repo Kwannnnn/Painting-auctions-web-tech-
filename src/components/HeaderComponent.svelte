@@ -65,8 +65,8 @@
                         <div>
                             <a href="/" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Home</a>
-                            <a href="/admin" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                               aria-current="page">Global settings</a>
+                            <a href="/admin" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                               aria-current="page">Admin</a>
                             <a href="/users/{uid}" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
                                aria-current="page">Profile</a>
                             {#if $tokenStore.token}

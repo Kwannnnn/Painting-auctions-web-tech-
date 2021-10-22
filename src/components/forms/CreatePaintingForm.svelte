@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import FormHeading from "../FormHeading.svelte";
+    import FormHeading from "./FormHeading.svelte";
     import Button from "../button/Button.svelte";
 
     let dispatch = createEventDispatcher();
@@ -21,7 +21,7 @@
             end_date: end_date,
             is_sold: false,
             list_of_bidders: [],
-            img_name: "",
+            img_name: "cat",
         };
         dispatch('addPainting', painting);
 

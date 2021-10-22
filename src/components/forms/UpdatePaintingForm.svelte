@@ -1,6 +1,6 @@
 <script>
     import {createEventDispatcher, onMount} from 'svelte';
-    import FormHeading from "../FormHeading.svelte";
+    import FormHeading from "./FormHeading.svelte";
     import Button from "../button/Button.svelte";
 
     let dispatch = createEventDispatcher();
@@ -33,7 +33,10 @@
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <div class="px-4 sm:px-0">
-                        <FormHeading title="Modify painting {painting.id}">If you do not want to make any changes, click on the background to cancel</FormHeading>
+                        <FormHeading title="Modify painting {painting.id}">
+                            If you do not want to make any changes, click on the background to cancel <br/>
+                            For image name, type "cat" to see a funny picture.
+                        </FormHeading>
                     </div>
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">

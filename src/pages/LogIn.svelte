@@ -12,11 +12,12 @@
     let password;
 
     const getUserFromToken = (token) => {
-        const {email_address, isAdmin} = jwt_decode(token);
+        const {email_address, isAdmin, id} = jwt_decode(token);
 
         const user = {
             email_address: email_address,
             isAdmin: isAdmin,
+            id: id
         }
 
         return user;

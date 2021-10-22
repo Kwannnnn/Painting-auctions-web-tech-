@@ -64,14 +64,12 @@
     }
 
     const toggleUpdatePaintingModal = () => {
-        console.log(modalData);
         showUpdatePaintingModal = !showUpdatePaintingModal;
     }
 
 
     const addPainting = async (data) => {
         const painting = data.detail;
-        console.log(painting);
 
         const response = await fetch('http://localhost:3000/paintings', {
             method: "POST",
@@ -98,6 +96,7 @@
             alert("Failed to add painting \n" + response.statusText);
         }
 
+        await reloadTable();
         toggleAddPaintingModal();
     }
 
