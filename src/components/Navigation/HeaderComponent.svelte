@@ -1,10 +1,10 @@
 <!--Taken and modified from https://tailwindui.com/components/application-ui/navigation/navbars-->
 
 <script>
-    import tokenStore from "../stores/token";
+    import tokenStore from "../../stores/token";
     import router from "page";
-    import UserIcon from "../icons/UserIcon.svelte";
-    import {currentUser} from "../stores/currentUser";
+    import UserIcon from "../../icons/UserIcon.svelte";
+    import {currentUser} from "../../stores/currentUser";
 
     let uid = $currentUser.id;
     function logout() {

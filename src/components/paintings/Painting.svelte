@@ -15,17 +15,10 @@
 
         <div class="flex flex-col my-3 px-3 w-1/2 overflow-hidden ">
             <h1 class="text-2xl font-semibold w-full">{painting.name} ({painting.year_of_origin})</h1>
+            <h1 class="w-full flex-none text-xl font-medium text-gray-800 inline">{painting.artist}</h1>
 
             <div class="mt-4 space-y-1">
-                <div>
-                    <h1 class="w-full flex-none text-xl font-medium text-gray-800 mt-2 inline">Artist: </h1>
-                    <h2 class="inline">{painting.artist}</h2>
-                </div>
 
-                <div>
-                    <h1 class="w-full flex-none text-xl font-medium text-gray-800 mt-2 mb-2 inline">Year of origin: </h1>
-                    <h2 class="inline ">{painting.year_of_origin}</h2>
-                </div>
 
                 <div>
                     <h1 class="w-full flex-none text-xl font-medium text-gray-800 mt-2 mb-2 inline">Status: </h1>
