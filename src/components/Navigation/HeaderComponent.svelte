@@ -1,111 +1,105 @@
-<!--Taken and modified from https://tailwindui.com/components/application-ui/navigation/navbars-->
-
 <script>
     import tokenStore from "../../stores/token";
     import router from "page";
-    import UserIcon from "../../icons/UserIcon.svelte";
     import {currentUser} from "../../stores/currentUser";
 
     let uid = $currentUser.id;
+
     function logout() {
         $tokenStore.token = undefined;
         router.redirect("/");
     }
 
+    let showMobileMenu = 'hidden';
 
+    let toggleMobileMenu = () => {
+        showMobileMenu = showMobileMenu === 'hidden' ? '' : 'hidden';
+    };
 </script>
 
 
-<!--navbar 2-->
-<nav class="bg-gray-800">
-    <div class="w-full px-2 sm:px-6">
-        <div class="relative flex items-center justify-between h-16">
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+<nav class="bg-gray-800 flex flex-col">
+    <div class="w-full px-2 px-5 relative flex flex-row items-center justify-between h-16">
+            <!-- Mobile menu button -->
+            <div class="sm:hidden flex items-center">
+                <button class="outline-none mobile-menu-button" on:click={toggleMobileMenu}>
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+                         x-show="!showMenu"
+                         fill="none"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         stroke-width="2"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
 
-                <!-- Mobile menu button-->
-                <button type="button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <!--
-                      Icon when menu is closed.
-
-                      Menu open: "hidden", Menu closed: "block"
-                    -->
-                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                    <!--
-                      Icon when menu is open.
-
-                      Menu open: "block", Menu closed: "hidden"
-                    -->
-                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
 
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <!--logo-->
-                <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-8 w-auto"
+            <!--logo-->
+            <div class="sm:self-center">
+                <a href="/">
+                    <img class="h-8 w-auto"
                          src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
-                    <img class="hidden lg:block h-8 w-auto"
-                         src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                         alt="Workflow">
-                </div>
+                </a>
 
-                <!--items-->
-                <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-4">
-                        <div>
-                            <a href="/" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                               aria-current="page">Home</a>
-                            <a href="/admin" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                               aria-current="page">Admin</a>
-                            <a href="/users/{uid}" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                               aria-current="page">Profile</a>
-                        </div>
+            </div>
 
+            <!--items-->
+            <div class="hidden sm:block sm:mr-auto">
+                <div class="flex space-x-4">
+                    <div>
+                        <a href="/"
+                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                           aria-current="page">Home</a>
+                        <a href="/admin"
+                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                           aria-current="page">Admin</a>
                     </div>
-                </div>
 
-                <div class="ml-auto">
-                    {#if $tokenStore.token}
-                        <p class="text-white inline px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
-                           aria-current="page">{$currentUser.email_address}</p>
-                        <a on:click={logout} href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl"
-                           aria-current="page">Log out</a>
-                    {:else}
-                        <a href="/login" class="bg-gray-900 text-white px-3 mx-1 py-2 rounded-md text-sm font-medium text-xl tracking-wide"
-                           aria-current="page">Log in</a>
-                    {/if}
                 </div>
-
             </div>
-<!--            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">-->
-<!--            Click on user icon to go to profile page-->
+
             <div class="">
-                <UserIcon/>
+                {#if $tokenStore.token}
+                    <p class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+
+                       aria-current="page">{$currentUser.email_address}</p>
+                    <a on:click={logout} href="/login"
+                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                       aria-current="page">Log out</a>
+                {:else}
+                    <a href="/login"
+                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                       aria-current="page">Log in</a>
+                {/if}
             </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div class="{showMobileMenu} flex flex-col items-center space-y-1.5 p-3 sm:hidden">
+        <div class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400">
+            <a href="/">Home</a>
+        </div>
+
+        <div class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400">
+            <a href="/admin">Admin</a>
         </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-center text-white block px-3 py-2 rounded-md text-base font-medium"
-               aria-current="page">Home</a>
+    <!--    old mobile menu-->
+    <!--    <div class="sm:hidden" id="mobile-menu">-->
+    <!--        <div class="px-2 pt-2 pb-3 space-y-1">-->
+    <!--            <a href="/" class="bg-gray-900 text-center text-white block px-3 py-2 rounded-md text-base font-medium"-->
+    <!--               aria-current="page">Home</a>-->
 
-            <a href="#"
-               class="text-gray-300 text-center hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                Profile</a>
+    <!--            {#if $currentUser.isAdmin}-->
+    <!--                <a href="/admin"-->
+    <!--                   class="text-gray-300 text-center hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">-->
+    <!--                    Admin</a>-->
+    <!--            {/if}-->
 
-        </div>
-    </div>
+    <!--        </div>-->
+    <!--    </div>-->
 </nav>

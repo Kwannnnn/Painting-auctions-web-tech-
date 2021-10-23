@@ -19,7 +19,6 @@
 
             <div class="mt-4 space-y-1">
 
-
                 <div>
                     <h1 class="w-full flex-none text-xl font-medium text-gray-800 mt-2 mb-2 inline">Status: </h1>
                     {#if !painting.is_sold}
@@ -31,7 +30,7 @@
 
                 <div>
                     <h1 class="w-full flex-none text-xl font-medium text-gray-800 mt-2 mb-2 inline">Bidders: </h1>
-                    <h2 class="inline">{painting.list_of_bidders}</h2>
+                    <h2 class="inline">{painting.list_of_bidders.length}</h2>
                 </div>
 
                 <div>

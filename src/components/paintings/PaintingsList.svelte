@@ -5,7 +5,8 @@
 
     export let paintingsList = [];
 
-    let items = paintingsList;
+
+    $: items = paintingsList;
     let currentPage = 1;
     let pageSize = 4;
     $: paginatedItems = paginate( {items, pageSize, currentPage });
@@ -18,8 +19,8 @@
         <p>There are no items</p>
     {:else}
         <div class="flex flex-wrap mx-3 overflow-hidden">
-            {#each paginatedItems as painting, i}
-                <div on:click={() => router.redirect(`/paintings/${i+1}`)}  class="my-3 px-10 w-full h-full overflow-hidden sm:w-full xl:w-1/2">
+            {#each paginatedItems as painting}
+                <div on:click={() => router.redirect(`/paintings/${painting.id}`)}  class="my-3 px-10 w-full h-full overflow-hidden sm:w-full xl:w-1/2">
                     <div class="flex rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar">
                         <Painting painting={painting}/>
                     </div>

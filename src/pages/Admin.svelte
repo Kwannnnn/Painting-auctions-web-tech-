@@ -2,7 +2,7 @@
     import {onMount} from "svelte";
     import PaintingsTable from "../components/paintings/PaintingsTable.svelte";
     import tokenStore from "../stores/token";
-    import NewPaintingModal from "../components/Modal.svelte";
+    import Modal from "../components/Modal.svelte";
     import CreatePaintingForm from "../components/forms/CreatePaintingForm.svelte";
     import Button from "../components/button/Button.svelte";
     import UpdatePaintingForm from "../components/forms/UpdatePaintingForm.svelte";
@@ -51,9 +51,10 @@
             });
 
             if (resp.ok) {
-                alert("delete successful")
+                alert(`Painting with id ${id} successfully deleted`)
                 await reloadTable();
             } else {
+                alert(`Delete unsuccessful \n${resp.statusText}`)
                 throw new Error(await resp.text());
             }
         }
@@ -145,14 +146,13 @@
                         modalData = data.detail;
                        toggleUpdatePaintingModal();
                     }}/>
-
-    <NewPaintingModal isPromo={true} bind:showModal={showAddPaintingModal} on:click={toggleAddPaintingModal}>
+    <Modal isPromo={true} bind:showModal={showAddPaintingModal} on:click={toggleAddPaintingModal}>
         <CreatePaintingForm on:addPainting={(data) => addPainting(data)}/>
-    </NewPaintingModal>
+    </Modal>
 
-    <NewPaintingModal isPromo={true} bind:showModal={showUpdatePaintingModal} on:click={toggleUpdatePaintingModal}>
+    <Modal isPromo={true} bind:showModal={showUpdatePaintingModal} on:click={toggleUpdatePaintingModal}>
         <UpdatePaintingForm bind:painting={modalData} on:updatePainting={(data) => updatePainting(data)}/>
-    </NewPaintingModal>
+    </Modal>
 
     <Button on:click={toggleAddPaintingModal}>
         Add painting

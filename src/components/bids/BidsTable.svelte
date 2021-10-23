@@ -43,20 +43,22 @@
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                    {#each bids as bid}
-                        <tr class="hover:bg-gray-100">
-                            <td class="px-10 py-2 whitespace-nowrap">{bid.id}</td>
-                            <td class="px-10 py-2 whitespace-nowrap">{bid.user_id}</td>
-                            <td class="px-10 py-2 whitespace-nowrap">{bid.painting_id}</td>
-                            <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i></td>
-                            {#if $currentUser.isAdmin}
-                                <td class="px-10 py-2 whitespace-nowrap">
-                                    <TrashIcon on:click={() => handleDelete(bid.id)}/>
-                                </td>
+                    {#if bids}
+                        {#each bids as bid}
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-10 py-2 whitespace-nowrap">{bid.id}</td>
+                                <td class="px-10 py-2 whitespace-nowrap">{bid.user_id}</td>
+                                <td class="px-10 py-2 whitespace-nowrap">{bid.painting_id}</td>
+                                <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i></td>
+                                {#if $currentUser.isAdmin}
+                                    <td class="px-10 py-2 whitespace-nowrap">
+                                        <TrashIcon on:click={() => handleDelete(bid.id)}/>
+                                    </td>
 
-                            {/if}
+                                {/if}
                             </tr>
-                    {/each}
+                        {/each}
+                    {/if}
                     </tbody>
                 </table>
             </div>
