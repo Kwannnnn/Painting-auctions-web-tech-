@@ -53,7 +53,7 @@ exports.addBid = (req, res) => {
 
                 // check if user id already exists in the list of bidders of the painting
                 let isMatched = false;
-                for (let user_id of painting.list_of_bidders){
+                for (let user_id of painting.list_of_bidders) {
                     if (user_id == bid.user_id) isMatched = true;
                 }
                 if (!isMatched) painting.list_of_bidders.push(user.id);
@@ -66,6 +66,7 @@ exports.addBid = (req, res) => {
                     .json(bidWithId);
             } else {
                 res.status(StatusCodes.BAD_REQUEST)
+                    .json(bid)
                     .send("Bid amount must be greater than the current price")
             }
 
@@ -84,21 +85,45 @@ exports.addBid = (req, res) => {
 
 exports.deleteBid = (req, res) => {
     const {id} = req.params;
+    const user = req.user;
 
     const bid = bids.find(bid => bid.id == id);
     if (bid) {
-        bids.splice(bids.indexOf(bid), 1);
-        // delete bid id from every user
-        const bidders = users.filter(user => user.id == bid.user_id);
-        for (let bidder of bidders) {
+        if (user.isAdmin || bid.user_id == user.id) {
+            const bidder = users.find(user => user.id == bid.user_id);
+
+            // delete bid id from user
             bidder.list_of_bids.splice(
                 bidder.list_of_bids.findIndex(bid => bid.id == id), 1);
-        }
 
-        res.json([bid, bidders]);
+            // delete bid from bids list
+            bids.splice(bids.indexOf(bid), 1);
+
+            // update current price of painting
+            const bidsOfPainting = bids.filter(b => b.painting_id == bid.painting_id);
+
+            //find maximum amount among the bids and update painting
+            const maxAmount = Math.max.apply(Math, bidsOfPainting.map(function(bid) { return bid.amount; }));
+
+            const paintingToUpdate = paintings.find(painting => painting.id == bid.painting_id);
+            paintings[paintings.indexOf(paintingToUpdate)].current_price = maxAmount;
+
+
+            // if the bidder does not have any bids on the painting
+            // update list of bidders for current painting
+            if (!bidsOfPainting.find(bid => bid.user_id == bidder.id)) {
+                paintingToUpdate.list_of_bidders.splice(paintingToUpdate.list_of_bidders.indexOf(bidder.id), 1);
+            }
+            res.json(bid);
+
+        } else {
+            res
+                .status(StatusCodes.UNAUTHORIZED)
+                .send(`You are not authorized to delete bid with id ${id}`);
+        }
     } else {
         res
             .status(StatusCodes.NOT_FOUND)
-            .send(`Bid with id ${id} cannot be found`);
+            .send(`User with id ${id} cannot be found`);
     }
 };

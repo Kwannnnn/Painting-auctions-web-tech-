@@ -12,7 +12,7 @@ router.get("/:id", controller.getOneBid);
 
 router.post("", isLoggedIn, bidValidators, validateResult, controller.addBid);
 
-router.delete("/:id", isLoggedIn, isAdmin, controller.deleteBid);
+router.delete("/:id", isLoggedIn, controller.deleteBid);
 
 
 module.exports = router;

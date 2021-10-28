@@ -1,6 +1,10 @@
 const {validationResult, body, a} = require("express-validator");
 const {StatusCodes} = require("http-status-codes");
 
+/**
+ *
+ */
+
 exports.paintingValidators = [
     body('name')
         .escape()

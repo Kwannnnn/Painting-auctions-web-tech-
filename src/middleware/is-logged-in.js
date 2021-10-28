@@ -1,7 +1,6 @@
 const {StatusCodes} = require('http-status-codes');
 const users = require('../data/users');
 
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 const isLoggedIn = (req, res, next) => {

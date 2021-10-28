@@ -38,7 +38,7 @@ const paintings = [
         artist: "Johannes Vermeer",
         year_of_origin: 1665,
         current_price: 200,
-        end_date: "2021-12-1",
+        end_date: "2021-12-01",
         is_sold: false,
         list_of_bidders: [],
         img_name: "GirlwithaPearlEarring"
