@@ -9,7 +9,7 @@ router.get("", controller.getUsers);
 
 router.get("/:id", controller.getOneUser);
 
-router.post("", isLoggedIn, isAdmin, userValidators, validateResult, controller.addUser);
+router.post("", userValidators, validateResult, controller.addUser);
 
 router.put("/:id", isLoggedIn, isAdmin, userValidators, validateResult, controller.updateUser);
 

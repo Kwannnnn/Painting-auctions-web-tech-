@@ -18,7 +18,7 @@ const users = [
         password : "$2a$10$ualu4YVjfKPaGTvQxNPrt.FBuJa07yBC8LAgGC3LHIMD9XX3nOQyS", //@Password2
         secret : uuidv4(),
         isAdmin: false,
-        list_of_bids: [2]
+        list_of_bids: [3]
     },
     {
         id: 3,
@@ -27,7 +27,7 @@ const users = [
         password : "$2a$10$/8r2CRsIuEeiAtNTm2WgNu74aolocegLvoyu5ZB40yOTot.yWNRp2", //@Password3
         secret : uuidv4(),
         isAdmin: true,
-        list_of_bids: []
+        list_of_bids: [1]
     },
     {
         id: 4,
@@ -36,7 +36,7 @@ const users = [
         password : "$2a$10$iqYj3vN83M.SeTWJGe0RQuolS/curr9MZpNmxF/1UTboAv..T08q.", //@Password4
         secret : uuidv4(),
         isAdmin: true,
-        list_of_bids: []
+        list_of_bids: [1]
     },
     {
         id: 5,

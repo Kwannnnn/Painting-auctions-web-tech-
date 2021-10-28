@@ -5,7 +5,7 @@ const paintings = [
         artist: "Edvard Munch",
         year_of_origin: 1893,
         current_price: 200,
-        end_date: "2021-12-24",
+        end_date: "2021-10-24",
         is_sold: true,
         list_of_bidders: [1],
         img_name: "TheScream"
@@ -53,6 +53,28 @@ const paintings = [
         is_sold: false,
         list_of_bidders: [],
         img_name: "MonaLisa"
+    },
+    {
+        id: 6,
+        name: "La Guernica",
+        artist: "Picasso",
+        year_of_origin: 1937,
+        current_price: 800,
+        end_date: "2022-10-15",
+        is_sold: true,
+        list_of_bidders: [4,2,3],
+        img_name: "LaGuernica"
+    },
+    {
+        id: 7,
+        name: "The Creation of Adam",
+        artist: "Michelangelo",
+        year_of_origin: 1511,
+        current_price: 100,
+        end_date: "2022-01-15",
+        is_sold: false,
+        list_of_bidders: [],
+        img_name: "TheCreationOfAdam"
     }
 ];
 
