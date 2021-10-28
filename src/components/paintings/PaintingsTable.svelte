@@ -16,7 +16,6 @@
     }
 
 
-
 </script>
 
 <div class="flex flex-row justify-center my-2 overflow-x-auto w-5/6 shadow border-b border-gray-200 rounded-l-lg mx-6">
@@ -82,10 +81,10 @@
                 </div>
                 <!--Action buttons to edit and delete a painting-->
                 <td class="px-6 py-2 whitespace-nowrap">{painting.list_of_bidders}</td>
-                <td class="px-2 py-2 text-left border border-gray-800 whitespace-nowrap hover:bg-red-500">
+                <td class="px-2 py-2 text-left border border-gray-800 whitespace-nowrap hover:bg-red-200">
                     <TrashIcon on:click={handleDelete(painting.id)} class="whitespace-nowrap "/>
                 </td>
-                <td class="px-2 py-2 text-left border border-gray-800 whitespace-nowrap hover:bg-indigo-500">
+                <td class="px-2 py-2 text-left border border-gray-800 whitespace-nowrap hover:bg-indigo-200">
                     <EditIcon on:click={handleUpdate(painting)} class="whitespace-nowrap"/>
                 </td>
             </tr>

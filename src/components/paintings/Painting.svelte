@@ -7,7 +7,8 @@
 
 {#if painting}
 
-    <div class="flex flex-col justify-between md:flex-row mx-1 my-4 w-full mx-auto px-6">
+    <div class="flex flex-col justify-between md:flex-row mx-1 my-4 w-full mx-auto px-6 max-w-6xl h-auto
+                bg-gray-50 bg-opacity-80 py-4 rounded-2xl border-gray-100 drop-shadow">
         <div class="my-3 px-3 w-2/5 overflow-hidden">
             <img src="http://localhost:3000/{painting.img_name}.jpg" alt={painting.name}
                  class="px-4 relative w-full h-full inset-0 object-cover"/>

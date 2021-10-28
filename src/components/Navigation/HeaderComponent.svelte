@@ -88,18 +88,4 @@
         </div>
     </div>
 
-    <!--    old mobile menu-->
-    <!--    <div class="sm:hidden" id="mobile-menu">-->
-    <!--        <div class="px-2 pt-2 pb-3 space-y-1">-->
-    <!--            <a href="/" class="bg-gray-900 text-center text-white block px-3 py-2 rounded-md text-base font-medium"-->
-    <!--               aria-current="page">Home</a>-->
-
-    <!--            {#if $currentUser.isAdmin}-->
-    <!--                <a href="/admin"-->
-    <!--                   class="text-gray-300 text-center hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">-->
-    <!--                    Admin</a>-->
-    <!--            {/if}-->
-
-    <!--        </div>-->
-    <!--    </div>-->
 </nav>
