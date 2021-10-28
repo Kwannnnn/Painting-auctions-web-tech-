@@ -38,10 +38,10 @@
             </div>
 
             <!--logo-->
-            <div class="sm:self-center">
+            <div class="sm:self-center mr-4">
                 <a href="/">
-                    <img class="h-8 w-auto"
-                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                    <img class="h-10 w-auto"
+                         src="/logo.png" alt="PaintBids">
                 </a>
 
             </div>
@@ -51,10 +51,10 @@
                 <div class="flex space-x-4">
                     <div>
                         <a href="/"
-                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
                            aria-current="page">Home</a>
                         <a href="/admin"
-                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
                            aria-current="page">Admin</a>
                     </div>
 
@@ -63,15 +63,15 @@
 
             <div class="">
                 {#if $tokenStore.token}
-                    <p class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                    <p class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
 
                        aria-current="page">{$currentUser.email_address}</p>
                     <a on:click={logout} href="/login"
-                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
                        aria-current="page">Log out</a>
                 {:else}
                     <a href="/login"
-                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                       class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
                        aria-current="page">Log in</a>
                 {/if}
             </div>
