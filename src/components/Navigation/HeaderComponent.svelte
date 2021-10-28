@@ -53,15 +53,18 @@
                         <a href="/"
                            class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
                            aria-current="page">Home</a>
-                        <a href="/admin"
-                           class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
-                           aria-current="page">Admin</a>
+
+                        {#if $currentUser.isAdmin}
+                            <a href="/admin"
+                               class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400"
+                               aria-current="page">Admin</a>
+                        {/if}
                     </div>
 
                 </div>
             </div>
 
-            <div class="">
+            <div>
                 {#if $tokenStore.token}
                     <p class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-900"
 
@@ -83,9 +86,11 @@
             <a href="/">Home</a>
         </div>
 
-        <div class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400">
-            <a href="/admin">Admin</a>
-        </div>
-    </div>
+        {#if $currentUser.isAdmin}
+            <div class="text-white inline w-full text-center px-3 mx-1 py-2 rounded-md text-sm font-medium tracking-wide text-xl hover:bg-purple-400">
+                <a href="/admin">Admin</a>
+            </div>
+        {/if}
 
+    </div>
 </nav>

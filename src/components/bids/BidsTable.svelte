@@ -1,5 +1,6 @@
 <script>
     import {currentUser} from "../../stores/currentUser";
+    import tokenStore from "../../stores/token";
     import {createEventDispatcher} from 'svelte';
     import TrashIcon from "../../icons/TrashIcon.svelte";
 
@@ -34,12 +35,13 @@
                         <th scope="col"
                             class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">Amount
                         </th>
-                        {#if $currentUser.isAdmin}
+                        {#if $tokenStore.token}
                             <th scope="col"
                                 class="px-10 py-3 text-left text-l font-medium text-gray-800 uppercase tracking-wide">
                                 Delete Bid
                             </th>
                         {/if}
+
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -49,12 +51,21 @@
                                 <td class="px-10 py-2 whitespace-nowrap">{bid.id}</td>
                                 <td class="px-10 py-2 whitespace-nowrap">{bid.user_id}</td>
                                 <td class="px-10 py-2 whitespace-nowrap">{bid.painting_id}</td>
-                                <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i></td>
+                                <td class="px-10 py-2 whitespace-nowrap text-indigo-900"><i><b>${bid.amount}</b></i>
+                                </td>
                                 {#if $currentUser.isAdmin}
                                     <td class="px-10 py-2 whitespace-nowrap">
                                         <TrashIcon on:click={() => handleDelete(bid.id)}/>
                                     </td>
 
+                                {:else}
+                                    {#if $tokenStore.token}
+                                        <td class="px-10 py-2 whitespace-nowrap">
+                                            {#if $currentUser.id == bid.user_id}
+                                                <TrashIcon on:click={() => handleDelete(bid.id)}/>
+                                            {/if}
+                                        </td>
+                                    {/if}
                                 {/if}
                             </tr>
                         {/each}

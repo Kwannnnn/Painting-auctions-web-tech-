@@ -1,5 +1,6 @@
 <script>
     import router from 'page';
+    import page from 'page';
     import Painting from "./Painting.svelte";
     import { paginate, LightPaginationNav } from 'svelte-paginate';
 
@@ -20,9 +21,8 @@
     {:else}
         <div class="flex flex-wrap mx-3 overflow-hidden">
             {#each paginatedItems as painting}
-                <div on:click={() => router.redirect(`/paintings/${painting.id}`)}
-                     class="my-3 px-10 w-full h-full overflow-hidden sm:w-full xl:w-1/2">
-                    <div class="flex bg-gray-50 bg-opacity-80 rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar drop-shadow">
+                <div on:click={() => page(`/paintings/${painting.id}`)}  class="my-3 px-10 w-full h-full overflow-hidden sm:w-full xl:w-1/2">
+                    <div class="flex rounded-2xl border border-gray-100 sm:rounded-3xl shadow-sidebar">
                         <Painting painting={painting}/>
                     </div>
 

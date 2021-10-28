@@ -16,9 +16,10 @@
     }
 
 
+
 </script>
 
-<div class="flex flex-row justify-center my-2 overflow-x-auto w-5/6 shadow border-b border-gray-200 rounded-l-lg mx-6">
+<div class="flex flex-col justify-center my-2 overflow-x-auto w-5/6 shadow border-b border-gray-200 rounded-l-lg mx-6">
     <table class="divide-y divide-gray-200 my-6">
         <thead class="bg-gray-100">
         <tr>
@@ -70,11 +71,11 @@
                 <div class="px-6 py-2 whitespace-nowrap">
                     <!--            Change color based on if the bid is sold-->
                     {#if !painting.is_sold}
-                        <td class="inline-flex bg-green-100 text-green-900 text-lg font-semibold rounded-full">
+                        <td class="inline-flex bg-green-100 text-green-900 text-lg font-semibold rounded-lg p-1.5">
                             Still available
                         </td>
                     {:else}
-                        <td class="inline-flex bg-red-100 text-red-900 text-lg font-semibold rounded-full">Not
+                        <td class="inline-flex bg-red-100 text-red-900 text-lg font-semibold rounded-lg p-1.5">Not
                             available
                         </td>
                     {/if}

@@ -10,10 +10,11 @@
     import Modal from "../components/Modal.svelte";
 
     export let params;
-
     let paintingId;
-
-    let bearer = `Bearer ${$tokenStore.token}`
+    let bearer = `Bearer ${$tokenStore.token}`;
+    let painting;
+    let bidsForPainting;
+    let showBidModal = false;
 
     onMount(async () => {
         paintingId = params.id;
@@ -21,9 +22,6 @@
         painting = await getPainting(paintingId);
     });
 
-    let painting;
-    let bidsForPainting;
-    let showBidModal = false;
 
     const getPainting = async (id) => {
         if (id) {
@@ -52,7 +50,6 @@
 
     const addBid = async (e) => {
         const bid = e.detail;
-        console.log(bid);
 
         const response = await fetch('http://localhost:3000/bids', {
             method: "POST",
@@ -70,8 +67,8 @@
 
         if (response.status === 201) {
             alert("Bid successfully added");
-            reloadPainting();
-            reloadTable();
+            await reloadPainting();
+            await reloadTable();
         } else {
             alert("Failed to add new bid \n" + response.statusText);
         }
@@ -117,8 +114,9 @@
             });
 
             if (resp.ok) {
-                alert("deleted bid")
-                reloadTable();
+                alert("deleted bid");
+                await reloadTable();
+                await reloadPainting();
             } else {
                 alert("delete failed")
             }
@@ -143,7 +141,6 @@
                     Place a bid
                 </Button>
             {/if}
-
 
         {:else }
             <Painting404/>
