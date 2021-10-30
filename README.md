@@ -1,6 +1,6 @@
 # PaintBids
 PaintBids is our auction website for the Web Technology hand-in assignment. It is about selling pieces of classical art on pretty affordable prices.
-Of course, it is a fake one and nobody is going to take your money, nor are you going to receive Mona Lisa for a little over 200 euros, so do not be afraid to place a bid to test the functionality.
+The website is packed with useful features to help the user navigate and make up their mind about which painting to bid on, so take a good look around!
 
 ## Description
 The web application consists mainly of five pages:
@@ -35,6 +35,13 @@ npm run start
 ```
 
 Navigate to [localhost:5000](http://localhost:5000). You should see our application running.
+
+You can use one of the following accounts to log in:
+
+|Role   | Email        | Password |
+|-------|:------------:|---------:|
+|Admin  |test1@test.com|@Password1|
+|User   |test2@test.com|@Password2|
 
 ##Developers
 The project has been created by the hard work of:

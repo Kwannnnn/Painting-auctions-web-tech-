@@ -1,6 +1,6 @@
 <script>
     import router from "page";
-
+    import isAdmin from './middleware/is-admin'
     import LogIn from "./pages/LogIn.svelte";
     import Home from "./pages/Home.svelte";
     import Admin from "./pages/Admin.svelte";
@@ -13,7 +13,7 @@
     router('/login', () => page = LogIn);
     router('/signup', () => page = SignUp);
     router('/', () => page = Home);
-    router('/admin', () => page = Admin);
+    router('/admin', isAdmin, () => page = Admin);
     router('/paintings/:id', (ctx) => {
         params = ctx.params;
         page = Painting;

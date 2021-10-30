@@ -1,9 +1,9 @@
 <!--Taken and modified from https://svelte.dev/repl/ca967b45a5aa47b2bb2f9118eb79eefe?version=3.43.1-->
 <script>
-    import {useForm, validators, HintGroup, Hint, email, required, minLength} from "svelte-use-form";
-    import tokenStore from "../stores/token";
+    import {Hint, HintGroup, required, useForm, validators} from "svelte-use-form";
     import router from "page";
     import PageLayout from "../components/layout/PageLayout.svelte";
+    import {checkEmail, checkPassword} from "../middleware/customValidators";
 
     const form = useForm();
 
@@ -40,17 +40,19 @@
 <PageLayout>
 
     <div class="container h-screen px-5 py-24 mx-auto flex flex-wrap items-center">
-        <form use:form class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+        <form use:form
+              class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
 
             <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign up</h2>
 
             <div class="relative mb-4">
                 <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-                <input type="email" id="email" name="email" use:validators={[required, email]} bind:value={email_address}
+                <input type="email" id="email" name="email" use:validators={[required, checkEmail]}
+                       bind:value={email_address}
                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                 <HintGroup for="email">
                     <Hint on="required" class="text-red-500">This is a mandatory field</Hint>
-                    <Hint on="email" hideWhenRequired class="text-red-500">Email is not valid</Hint>
+                    <Hint on="checkEmail" class="text-red-500" hideWhenRequired let:value>Invalid email</Hint>
                 </HintGroup>
             </div>
 
@@ -63,11 +65,16 @@
 
             <div class="relative mb-4">
                 <label for="password" class="leading-7 text-sm text-gray-600">Password</label>
-                <input type="password" id="password" name="password" use:validators={[required, minLength(6)]}
+                <input type="password" id="password" name="password"
                        bind:value={password}
+                       use:validators={[required, checkPassword]}
                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
-                <Hint for="password" on="required" class="text-red-500">This is a mandatory field</Hint>
-                <Hint for="password" on="minLength" class="text-red-500">Password must contain at least 6 characters</Hint>
+                <HintGroup for="password">
+                    <Hint on="required" class="text-red-500">This is a mandatory field</Hint>
+                    <Hint on="checkPassword" class="text-red-500" hideWhenRequired let:value>Your password is not strong
+                        enough
+                    </Hint>
+                </HintGroup>
             </div>
 
             <button disabled={!$form.valid} on:click|preventDefault={signup}
